@@ -11,15 +11,43 @@
 
 @layer base {
   body {
-    @apply bg-slate-950 text-white;
+    @apply min-h-screen bg-slate-950 text-white antialiased;
+    font-family: var(--font-inter);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    letter-spacing: 0.01em;
   }
   
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-playfair);
+    line-height: 1.2;
+    letter-spacing: 0.01em;
   }
   
-  body {
-    font-family: var(--font-inter);
+  p {
+    line-height: 1.75;
+  }
+}
+
+@layer components {
+  .stage-shell {
+    @apply relative w-full min-h-screen overflow-hidden px-4 py-8 sm:px-6 sm:py-12;
+  }
+
+  .stage-content {
+    @apply relative z-10 mx-auto w-full max-w-2xl;
+  }
+
+  .stage-title {
+    @apply font-serif text-3xl leading-tight text-yellow-100 sm:text-4xl md:text-5xl;
+  }
+
+  .stage-lead {
+    @apply text-base leading-relaxed text-yellow-200/85 sm:text-lg;
+  }
+
+  .stage-button {
+    @apply rounded-lg bg-gradient-to-r from-yellow-400 to-yellow-500 px-8 py-3 font-semibold text-slate-900 shadow-2xl transition-all duration-300 hover:from-yellow-300 hover:to-yellow-400;
   }
 }
 
