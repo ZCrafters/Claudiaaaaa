@@ -8,32 +8,32 @@ import { FlowerAnimation } from './flower-animation';
 const FULL_VERSE = `Sebab Aku ini mengetahui rancangan-rancangan apa yang ada pada-Ku mengenai kamu, demikianlah firman TUHAN, yaitu rancangan damai sejahtera dan bukan rancangan kecelakaan, untuk memberikan kepadamu hari depan yang penuh harapan.`;
 const VERSE_REFERENCE = 'Yeremia 29:11';
 const PERSONAL_MESSAGE = 'Dan aku percaya, kamu adalah bagian dari hari depan itu yang ingin aku jalani bersamamu. Mau nggak, jadi bagian dari perjalananku?';
-const ACCEPTED_MESSAGE = 'Aku tunggu kamu di [TEMPAT/WAKTU]';
-const WAITING_MESSAGE = 'Tidak apa-apa. Aku akan tetap di sini.';
+const SURPRISE_MESSAGE = 'Ada yang mau aku tunjukkin ke kamu…';
 
 export function FinalStage() {
   const { setCurrentStage } = useGame();
   const [showVerse, setShowVerse] = useState(false);
   const [showDivider, setShowDivider] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
-  const [showButtons, setShowButtons] = useState(false);
+  const [showSurpriseMessage, setShowSurpriseMessage] = useState(false);
   const [confetti, setConfetti] = useState<Array<{ id: number; x: number; y: number }>>([]);
-  const [selectedOption, setSelectedOption] = useState<'yes' | 'no' | null>(null);
-  const [showSurprise, setShowSurprise] = useState(false);
   const [showFlowers, setShowFlowers] = useState(false);
-  const [surpriseClicks, setSurpriseClicks] = useState(0);
 
   useEffect(() => {
     const verseTimer = setTimeout(() => setShowVerse(true), 500);
     const dividerTimer = setTimeout(() => setShowDivider(true), FULL_VERSE.length * 50 + 1000);
     const messageTimer = setTimeout(() => setShowMessage(true), FULL_VERSE.length * 50 + 2000);
-    const buttonsTimer = setTimeout(() => setShowButtons(true), FULL_VERSE.length * 50 + 3500);
+    const surpriseTimer = setTimeout(() => {
+      triggerConfetti();
+      setShowSurpriseMessage(true);
+      setTimeout(() => setShowFlowers(true), 2000);
+    }, FULL_VERSE.length * 50 + 3500);
 
     return () => {
       clearTimeout(verseTimer);
       clearTimeout(dividerTimer);
       clearTimeout(messageTimer);
-      clearTimeout(buttonsTimer);
+      clearTimeout(surpriseTimer);
     };
   }, []);
 
@@ -73,24 +73,7 @@ export function FinalStage() {
     });
   };
 
-  const handleYes = () => {
-    setSelectedOption('yes');
-    triggerConfetti();
-    setTimeout(() => setShowSurprise(true), 1500);
-  };
 
-  const handleNo = () => {
-    setSelectedOption('no');
-  };
-
-  const handleSurpriseClick = () => {
-    const newClicks = surpriseClicks + 1;
-    setSurpriseClicks(newClicks);
-    
-    if (newClicks >= 1) {
-      setShowFlowers(true);
-    }
-  };
 
   // Show flower animation if triggered
   if (showFlowers) {
@@ -193,97 +176,40 @@ export function FinalStage() {
           </motion.div>
         )}
 
-        {/* Action Buttons */}
-        {showButtons && !selectedOption && (
+        {/* Surprise Message */}
+        {showSurpriseMessage && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center"
+            className="text-center mt-8 sm:mt-12"
           >
-            <motion.button
-              onClick={handleYes}
-              className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-slate-900 font-bold text-sm sm:text-lg rounded-lg shadow-2xl"
-              whileHover={{
-                boxShadow: '0 0 30px rgba(250, 204, 21, 0.8)',
-                scale: 1.05,
+            <motion.div 
+              className="inline-block px-6 sm:px-8 py-4 sm:py-6 bg-yellow-400/20 border border-yellow-400 rounded-lg max-w-sm"
+              animate={{
+                boxShadow: [
+                  '0 0 20px rgba(250, 204, 21, 0.3)',
+                  '0 0 40px rgba(250, 204, 21, 0.6)',
+                  '0 0 20px rgba(250, 204, 21, 0.3)',
+                ],
               }}
-              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 2, repeat: Infinity }}
             >
-              Iya, aku mau 💛
-            </motion.button>
-            <motion.button
-              onClick={handleNo}
-              className="px-6 sm:px-8 py-3 sm:py-4 bg-slate-700 hover:bg-slate-600 text-yellow-100 font-bold text-sm sm:text-lg rounded-lg shadow-2xl border border-yellow-400/50"
-              whileHover={{
-                scale: 1.05,
-                borderColor: 'rgba(253, 224, 71, 0.8)',
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Aku perlu waktu…
-            </motion.button>
+              <p className="text-yellow-100 text-lg sm:text-2xl font-serif">
+                {SURPRISE_MESSAGE.split('').map((char, idx) => (
+                  <motion.span
+                    key={idx}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: idx * 0.05 }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </p>
+            </motion.div>
           </motion.div>
         )}
-
-        {/* Response Messages */}
-        <AnimatePresence>
-          {selectedOption === 'yes' && !showSurprise && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-center mt-8 sm:mt-12"
-            >
-              <motion.div className="inline-block px-6 sm:px-8 py-4 sm:py-6 bg-yellow-400/20 border border-yellow-400 rounded-lg max-w-sm">
-                <p className="text-yellow-100 text-lg sm:text-xl font-serif mb-3 sm:mb-4">
-                  Terima kasih…
-                </p>
-                <p className="text-yellow-200 text-base sm:text-lg">
-                  {ACCEPTED_MESSAGE}
-                </p>
-              </motion.div>
-            </motion.div>
-          )}
-
-          {selectedOption === 'yes' && showSurprise && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-center mt-8 sm:mt-12"
-            >
-              <motion.div 
-                className="inline-block px-6 sm:px-8 py-4 sm:py-6 bg-yellow-400/20 border border-yellow-400 rounded-lg max-w-sm cursor-pointer hover:bg-yellow-400/30 transition-all"
-                onClick={handleSurpriseClick}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <p className="text-yellow-100 text-lg sm:text-xl font-serif mb-3 sm:mb-4">
-                  Aku punya kejutan untuk kamu…
-                </p>
-                <p className="text-yellow-200 text-sm sm:text-base">
-                  Klik untuk melihat bunga 🌸
-                </p>
-              </motion.div>
-            </motion.div>
-          )}
-
-          {selectedOption === 'no' && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-center mt-8 sm:mt-12"
-            >
-              <motion.div className="inline-block px-6 sm:px-8 py-4 sm:py-6 bg-slate-700/50 border border-yellow-400/30 rounded-lg max-w-sm">
-                <p className="text-yellow-200 text-base sm:text-lg">
-                  {WAITING_MESSAGE}
-                </p>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </div>
   );
