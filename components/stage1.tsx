@@ -85,7 +85,7 @@ export function Stage1() {
         />
       </div>
 
-      <div className="stage-content max-w-2xl">
+      <div className="stage-content">
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -93,7 +93,7 @@ export function Stage1() {
           transition={{ duration: 0.6 }}
           className="mb-6 text-center sm:mb-8"
         >
-          <h1 className="stage-title mb-2 text-2xl sm:mb-4 sm:text-3xl md:text-4xl lg:text-5xl">
+          <h1 className="stage-title mb-2 sm:mb-4">
             STAGE 1 — Arah yang Hilang
           </h1>
         </motion.div>

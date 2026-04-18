@@ -35,7 +35,7 @@
   }
 
   .stage-content {
-    @apply relative z-10 mx-auto w-full max-w-3xl;
+    @apply relative z-10 mx-auto w-full max-w-2xl;
   }
 
   .stage-title {
