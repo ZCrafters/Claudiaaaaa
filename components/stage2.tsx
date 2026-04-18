@@ -67,11 +67,10 @@ export function Stage2() {
       {/* Flash effect on correct answer */}
       {isCorrect && (
         <motion.div
-          className="absolute inset-0 bg-yellow-400/20"
+          className="absolute inset-0 bg-yellow-400/20 pointer-events-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 0] }}
           transition={{ duration: 0.6 }}
-          pointerEvents="none"
         />
       )}
 
