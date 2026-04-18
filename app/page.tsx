@@ -1,16 +1,32 @@
+'use client';
+
+import { GameProvider, useGame } from './game-context';
+import { ParticleBackground } from '@/components/particle-background';
+import { LandingStage } from '@/components/landing-stage';
+import { Stage1 } from '@/components/stage1';
+import { Stage2 } from '@/components/stage2';
+import { Stage3 } from '@/components/stage3';
+import { FinalStage } from '@/components/final-stage';
+
+function GameContent() {
+  const { currentStage } = useGame();
+
+  return (
+    <>
+      <ParticleBackground />
+      {currentStage === 'landing' && <LandingStage />}
+      {currentStage === 'stage1' && <Stage1 />}
+      {currentStage === 'stage2' && <Stage2 />}
+      {currentStage === 'stage3' && <Stage3 />}
+      {currentStage === 'final' && <FinalStage />}
+    </>
+  );
+}
+
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center font-sans">
-      <main className="flex w-full max-w-3xl flex-col items-center gap-8 px-6 py-16 text-center sm:items-start sm:text-left">
-        <div className="flex flex-col gap-4">
-          <h1 className="text-4xl font-bold tracking-tight">
-            Clauudia
-          </h1>
-          <p className="max-w-md text-lg text-muted-foreground">
-            To get started, send a prompt or modify this page directly.
-          </p>
-        </div>
-      </main>
-    </div>
+    <GameProvider>
+      <GameContent />
+    </GameProvider>
   );
 }
