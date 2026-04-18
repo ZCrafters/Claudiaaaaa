@@ -51,7 +51,7 @@ export function Stage3() {
     oscillator.stop(audioContext.currentTime + 0.3);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       handleSubmit();
     }
@@ -156,15 +156,15 @@ export function Stage3() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyDown}
               placeholder="Tulis jawabanmu…"
-               className="w-full rounded-lg border-2 border-yellow-400 bg-slate-800/50 px-6 py-4 text-center text-base leading-relaxed text-yellow-100 placeholder-yellow-300/50 transition-all focus:border-yellow-300 focus:bg-slate-800/70 focus:outline-none sm:text-lg"
-               autoFocus
-             />
-             <motion.button
-               onClick={handleSubmit}
-               disabled={isCorrect}
-               className="stage-button mt-4 w-full disabled:opacity-50"
+              className="w-full rounded-lg border-2 border-yellow-400 bg-slate-800/50 px-6 py-4 text-center text-base leading-relaxed text-yellow-100 placeholder-yellow-300/50 transition-all focus:border-yellow-300 focus:bg-slate-800/70 focus:outline-none sm:text-lg"
+              autoFocus
+            />
+            <motion.button
+              onClick={handleSubmit}
+              disabled={isCorrect}
+              className="stage-button mt-4 w-full disabled:opacity-50"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >

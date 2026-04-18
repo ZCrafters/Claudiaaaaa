@@ -51,7 +51,7 @@ export function Stage2() {
     oscillator.stop(audioContext.currentTime + 0.3);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       handleSubmit();
     }
@@ -90,9 +90,9 @@ export function Stage2() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-10 text-center sm:mb-12"
+          className="mb-6 text-center sm:mb-8"
         >
-          <h1 className="stage-title mb-4">
+          <h1 className="stage-title">
             STAGE 2 — Siapa yang Tahu?
           </h1>
         </motion.div>
@@ -102,13 +102,13 @@ export function Stage2() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="mb-10 space-y-4 text-center sm:mb-12"
+          className="mb-8 space-y-3 text-center sm:mb-10"
         >
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="stage-lead text-base sm:text-lg"
+            className="text-sm leading-relaxed text-yellow-200/75 sm:text-base"
           >
             Dia tahu sebelum kamu tahu.
           </motion.p>
@@ -116,7 +116,7 @@ export function Stage2() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.6 }}
-            className="stage-lead text-base sm:text-lg"
+            className="text-sm leading-relaxed text-yellow-200/75 sm:text-base"
           >
             Dia melihat sebelum kamu berjalan.
           </motion.p>
@@ -124,7 +124,7 @@ export function Stage2() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.0, duration: 0.6 }}
-            className="font-serif text-xl leading-snug text-yellow-100 sm:text-2xl"
+            className="font-serif text-xl font-semibold leading-snug text-yellow-100 sm:text-2xl"
           >
             Siapakah Dia?
           </motion.p>
@@ -136,24 +136,24 @@ export function Stage2() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1.3, duration: 0.6 }}
-            className="mb-8"
+            className="mx-auto mb-8 flex max-w-md flex-col items-center gap-4"
           >
             <input
               ref={inputRef}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyDown}
               placeholder="Tulis jawabanmu…"
-               className="w-full rounded-lg border-2 border-yellow-400 bg-slate-800/50 px-6 py-4 text-center text-base leading-relaxed text-yellow-100 placeholder-yellow-300/50 transition-all focus:border-yellow-300 focus:bg-slate-800/70 focus:outline-none sm:text-lg"
-               autoFocus
-             />
-             <motion.button
-               onClick={handleSubmit}
-               disabled={isCorrect}
-               className="stage-button mt-4 w-full disabled:opacity-50"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              className="w-full rounded-xl border-2 border-yellow-400 bg-slate-800/50 px-6 py-4 text-center text-base text-yellow-100 placeholder-yellow-300/40 transition-all focus:border-yellow-300 focus:bg-slate-800/70 focus:outline-none sm:text-lg"
+              autoFocus
+            />
+            <motion.button
+              onClick={handleSubmit}
+              disabled={isCorrect}
+              className="stage-button w-full py-3.5 text-base disabled:opacity-50 sm:py-4 sm:text-lg"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
             >
               Kirim
             </motion.button>

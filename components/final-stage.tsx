@@ -102,7 +102,7 @@ export function FinalStage() {
           initial={{ x: `${piece.x}%`, y: `${piece.y}%`, opacity: 1 }}
           animate={{
             x: `${piece.x + (Math.random() - 0.5) * 100}%`,
-            y: window.innerHeight + 50,
+            y: '110vh',
             opacity: 0,
           }}
           transition={{ duration: 2, ease: 'easeIn' }}

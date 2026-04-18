@@ -68,12 +68,13 @@ export function LandingStage() {
         </motion.div>
 
         {/* Main text - word by word animation */}
-        <div className="mb-6 flex min-h-[6.5rem] w-full max-w-[24ch] items-center justify-center sm:mb-8 sm:min-h-[7.5rem] md:min-h-[8.5rem]">
+        <div className="mb-8 flex w-full max-w-lg items-center justify-center sm:mb-10">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="px-2 font-serif text-xl leading-tight text-yellow-100 sm:px-3 sm:text-2xl md:text-3xl lg:text-4xl"
+            className="font-serif text-2xl leading-snug text-yellow-100 sm:text-3xl md:text-4xl lg:text-5xl"
+            style={{ wordSpacing: '0.1em' }}
           >
             <motion.span
               initial={{ opacity: 0, y: 10 }}
@@ -134,7 +135,7 @@ export function LandingStage() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
             onClick={() => setCurrentStage('stage1')}
-            className="stage-button mt-2 text-sm tracking-wide sm:mt-3 sm:text-lg"
+            className="stage-button mt-4 px-10 py-3.5 text-base tracking-widest sm:mt-6 sm:text-lg"
             whileHover={{
               boxShadow: '0 0 30px rgba(250, 204, 21, 0.6)',
               scale: 1.05,

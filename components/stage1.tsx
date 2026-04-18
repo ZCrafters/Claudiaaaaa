@@ -28,9 +28,8 @@ export function Stage1() {
         setTimeout(() => setShowClue(true), 600);
       } else {
         setShake(true);
-        setTimeout(() => setShake(false), 500);
-        // Remove last word and mark error
         setTimeout(() => {
+          setShake(false);
           setSelectedWords(selectedWords.slice(0, -1));
           setAvailableWords([...availableWords, selectedWords[selectedWords.length - 1]]);
         }, 500);
@@ -72,7 +71,7 @@ export function Stage1() {
     <div className={`stage-shell flex flex-col items-center justify-center transition-all ${shake ? 'shake' : ''}`}>
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-black" />
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-64 sm:w-96 h-64 sm:h-96 bg-yellow-400/3 rounded-full blur-3xl" />
+        <div className="w-64 sm:w-96 h-64 sm:h-96 rounded-full blur-3xl" style={{ background: 'rgba(250,204,21,0.04)' }} />
       </div>
 
       {/* Progress Bar */}
@@ -85,7 +84,7 @@ export function Stage1() {
         />
       </div>
 
-      <div className="stage-content">
+      <div className="stage-content max-w-3xl">
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -93,78 +92,107 @@ export function Stage1() {
           transition={{ duration: 0.6 }}
           className="mb-6 text-center sm:mb-8"
         >
-          <h1 className="stage-title mb-2 sm:mb-4">
+          <h1 className="stage-title mb-4">
             STAGE 1 — Arah yang Hilang
           </h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="mx-auto max-w-md text-center text-sm leading-relaxed text-yellow-200/75 sm:text-base"
+          >
+            Tidak semua arah membawa terang. Susun kata yang membentuk jalan menuju masa depan.
+          </motion.p>
         </motion.div>
-
-        {/* Instruction */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="stage-lead mx-auto mb-8 max-w-xl px-4 text-center text-sm sm:mb-12 sm:text-base md:text-lg"
-        >
-          Tidak semua arah membawa terang. Susun kata yang membentuk jalan menuju masa depan.
-        </motion.p>
 
         {/* Word Chips */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.6 }}
-          className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4 mb-8 sm:mb-12"
+          className="mb-7 flex min-h-[5rem] flex-wrap items-center justify-center gap-3 sm:gap-4"
         >
           {availableWords.map((word, idx) => (
             <motion.button
               key={word}
               onClick={() => handleWordClick(word)}
-               className="cursor-pointer rounded-lg bg-gradient-to-r from-yellow-500 to-yellow-600 px-3 py-2 text-xs font-semibold tracking-wide text-slate-900 transition-all duration-300 hover:from-yellow-400 hover:to-yellow-500 sm:px-4 sm:py-3 sm:text-sm"
-              whileHover={{ scale: 1.05, y: -5 }}
-              whileTap={{ scale: 0.95 }}
+              className="cursor-pointer rounded-xl bg-gradient-to-r from-yellow-500 to-yellow-600 px-6 py-4 text-base font-bold tracking-wider text-slate-900 shadow-lg transition-all duration-200 hover:from-yellow-400 hover:to-yellow-500 sm:px-7 sm:py-4 sm:text-lg"
+              whileHover={{ scale: 1.08, y: -3 }}
+              whileTap={{ scale: 0.94 }}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5 + idx * 0.1 }}
+              transition={{ delay: 0.5 + idx * 0.07 }}
             >
               {word}
             </motion.button>
           ))}
+          {availableWords.length === 0 && !isCorrect && (
+            <span className="text-xs text-yellow-300/40 italic">Semua kata sudah dipilih</span>
+          )}
         </motion.div>
 
         {/* Drop Zone */}
-        <div className="mb-6 rounded-lg border-2 border-yellow-400/50 bg-slate-800/50 p-4 sm:mb-8 sm:p-8">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.5 }}
+          className="mb-5 rounded-2xl border-2 border-yellow-400/30 bg-slate-800/40 p-4 backdrop-blur-sm sm:p-6"
+        >
+          <p className="mb-3 text-center text-xs font-semibold uppercase tracking-widest text-yellow-400/50 sm:mb-4">
+            Urutan kata
+          </p>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
             {Array.from({ length: NUM_SLOTS }).map((_, idx) => (
               <motion.div
                 key={idx}
-                className="aspect-square bg-slate-900/50 border-2 border-dashed border-yellow-300/50 rounded-lg flex items-center justify-center min-h-12 sm:min-h-16 relative"
+                className="flex min-h-[4.5rem] items-center justify-center rounded-xl border-2 border-dashed bg-slate-900/50 p-1 sm:min-h-[5.5rem]"
                 animate={{
                   borderColor:
                     selectedWords[idx] && selectedWords[idx] === CORRECT_ORDER[idx]
                       ? 'rgba(34, 197, 94, 0.7)'
-                      : 'rgba(253, 224, 71, 0.5)',
+                      : selectedWords[idx]
+                      ? 'rgba(250, 204, 21, 0.55)'
+                      : 'rgba(253, 224, 71, 0.2)',
+                  backgroundColor:
+                    selectedWords[idx] && selectedWords[idx] === CORRECT_ORDER[idx]
+                      ? 'rgba(34, 197, 94, 0.08)'
+                      : 'rgba(0,0,0,0)',
                 }}
               >
                 {selectedWords[idx] ? (
                   <motion.button
                     onClick={() => handleRemoveWord(idx)}
-                    className="px-2 sm:px-3 py-1 sm:py-2 bg-yellow-500 text-slate-900 font-bold rounded text-xs sm:text-sm cursor-pointer hover:bg-yellow-400 transition-all"
+                    className="w-full rounded-lg bg-yellow-500 px-2 py-2 text-xs font-bold text-slate-900 transition-colors hover:bg-yellow-400 sm:text-sm"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    initial={{ scale: 0.8, opacity: 0 }}
+                    initial={{ scale: 0.7, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                   >
                     {selectedWords[idx]}
                   </motion.button>
                 ) : (
-                  <span className="text-yellow-300/50 text-xs">Slot {idx + 1}</span>
+                  <span className="select-none text-xs text-yellow-300/25">
+                    {idx + 1}
+                  </span>
                 )}
               </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Success Message and Clue */}
+        {/* Helper text */}
+        {!isCorrect && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="mb-4 text-center text-xs text-yellow-300/35"
+          >
+            Klik kata untuk memilih · Klik slot untuk mengembalikan
+          </motion.p>
+        )}
+
+        {/* Success + Clue */}
         <AnimatePresence>
           {isCorrect && (
             <motion.div
@@ -174,8 +202,8 @@ export function Stage1() {
               className="text-center"
             >
               <motion.div className="mb-6">
-                <div className="inline-block px-6 py-3 bg-green-500/20 border border-green-500 rounded-lg">
-                  <p className="text-green-300 font-bold">Benar!</p>
+                <div className="inline-block rounded-xl border border-green-500 bg-green-500/20 px-6 py-3">
+                  <p className="text-lg font-bold text-green-300">✓ Benar!</p>
                 </div>
               </motion.div>
 
@@ -186,12 +214,12 @@ export function Stage1() {
                   transition={{ delay: 0.3 }}
                   className="mb-8"
                 >
-                  <p className="mb-8 text-yellow-200 italic leading-relaxed">
+                  <p className="mb-8 text-base italic leading-relaxed text-yellow-200 sm:text-lg">
                     Ada seseorang yang sudah tahu jalan itu sejak awal…
                   </p>
                   <motion.button
                     onClick={() => setCurrentStage('stage2')}
-                    className="stage-button text-lg"
+                    className="stage-button text-base sm:text-lg"
                     whileHover={{
                       boxShadow: '0 0 30px rgba(250, 204, 21, 0.6)',
                       scale: 1.05,
