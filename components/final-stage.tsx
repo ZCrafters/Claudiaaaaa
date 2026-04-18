@@ -26,7 +26,6 @@ export function FinalStage() {
     const surpriseTimer = setTimeout(() => {
       triggerConfetti();
       setShowSurpriseMessage(true);
-      setTimeout(() => setShowFlowers(true), 2000);
     }, FULL_VERSE.length * 50 + 3500);
 
     return () => {
@@ -36,6 +35,10 @@ export function FinalStage() {
       clearTimeout(surpriseTimer);
     };
   }, []);
+
+  const handleSurpriseClick = () => {
+    setShowFlowers(true);
+  };
 
   const triggerConfetti = () => {
     const newConfetti = Array.from({ length: 50 }).map((_, i) => ({
@@ -184,8 +187,9 @@ export function FinalStage() {
             transition={{ duration: 0.6 }}
             className="text-center mt-8 sm:mt-12"
           >
-            <motion.div 
-              className="inline-block px-6 sm:px-8 py-4 sm:py-6 bg-yellow-400/20 border border-yellow-400 rounded-lg max-w-sm"
+            <motion.button
+              onClick={handleSurpriseClick}
+              className="inline-block px-6 sm:px-8 py-4 sm:py-6 bg-yellow-400/20 border border-yellow-400 rounded-lg max-w-sm cursor-pointer hover:bg-yellow-400/30 transition-all"
               animate={{
                 boxShadow: [
                   '0 0 20px rgba(250, 204, 21, 0.3)',
@@ -194,6 +198,8 @@ export function FinalStage() {
                 ],
               }}
               transition={{ duration: 2, repeat: Infinity }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               <p className="text-yellow-100 text-lg sm:text-2xl font-serif">
                 {SURPRISE_MESSAGE.split('').map((char, idx) => (
@@ -207,7 +213,7 @@ export function FinalStage() {
                   </motion.span>
                 ))}
               </p>
-            </motion.div>
+            </motion.button>
           </motion.div>
         )}
       </div>
