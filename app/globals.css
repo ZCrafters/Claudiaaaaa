@@ -31,7 +31,7 @@
 
 @layer components {
   .stage-shell {
-    @apply relative w-full min-h-screen overflow-hidden px-4 py-8 sm:px-6 sm:py-12;
+    @apply relative w-full min-h-screen overflow-x-hidden overflow-y-auto px-4 py-8 sm:px-6 sm:py-12;
   }
 
   .stage-content {
