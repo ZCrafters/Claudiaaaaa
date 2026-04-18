@@ -69,7 +69,7 @@ export function Stage1() {
   };
 
   return (
-    <div className={`relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden transition-all py-8 sm:py-12 px-4 sm:px-6 ${shake ? 'shake' : ''}`}>
+    <div className={`stage-shell flex flex-col items-center justify-center transition-all ${shake ? 'shake' : ''}`}>
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-black" />
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-64 sm:w-96 h-64 sm:h-96 bg-yellow-400/3 rounded-full blur-3xl" />
@@ -85,15 +85,15 @@ export function Stage1() {
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-2xl">
+      <div className="stage-content max-w-2xl">
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-6 sm:mb-8"
+          className="mb-6 text-center sm:mb-8"
         >
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-yellow-100 mb-2 sm:mb-4">
+          <h1 className="stage-title mb-2 text-2xl sm:mb-4 sm:text-3xl md:text-4xl lg:text-5xl">
             STAGE 1 — Arah yang Hilang
           </h1>
         </motion.div>
@@ -103,7 +103,7 @@ export function Stage1() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="text-center text-yellow-200/80 text-sm sm:text-base md:text-lg mb-8 sm:mb-12 px-4"
+          className="stage-lead mx-auto mb-8 max-w-xl px-4 text-center text-sm sm:mb-12 sm:text-base md:text-lg"
         >
           Tidak semua arah membawa terang. Susun kata yang membentuk jalan menuju masa depan.
         </motion.p>
@@ -119,7 +119,7 @@ export function Stage1() {
             <motion.button
               key={word}
               onClick={() => handleWordClick(word)}
-              className="px-3 sm:px-4 py-2 sm:py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-slate-900 font-bold text-xs sm:text-sm rounded-lg transition-all duration-300 cursor-pointer"
+               className="cursor-pointer rounded-lg bg-gradient-to-r from-yellow-500 to-yellow-600 px-3 py-2 text-xs font-semibold tracking-wide text-slate-900 transition-all duration-300 hover:from-yellow-400 hover:to-yellow-500 sm:px-4 sm:py-3 sm:text-sm"
               whileHover={{ scale: 1.05, y: -5 }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, scale: 0.8 }}
@@ -132,7 +132,7 @@ export function Stage1() {
         </motion.div>
 
         {/* Drop Zone */}
-        <div className="bg-slate-800/50 border-2 border-yellow-400/50 rounded-lg p-4 sm:p-8 mb-6 sm:mb-8">
+        <div className="mb-6 rounded-lg border-2 border-yellow-400/50 bg-slate-800/50 p-4 sm:mb-8 sm:p-8">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
             {Array.from({ length: NUM_SLOTS }).map((_, idx) => (
               <motion.div
@@ -186,12 +186,12 @@ export function Stage1() {
                   transition={{ delay: 0.3 }}
                   className="mb-8"
                 >
-                  <p className="text-yellow-200 italic mb-8">
+                  <p className="mb-8 text-yellow-200 italic leading-relaxed">
                     Ada seseorang yang sudah tahu jalan itu sejak awal…
                   </p>
                   <motion.button
                     onClick={() => setCurrentStage('stage2')}
-                    className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-slate-900 font-bold text-lg rounded-lg shadow-2xl"
+                    className="stage-button text-lg"
                     whileHover={{
                       boxShadow: '0 0 30px rgba(250, 204, 21, 0.6)',
                       scale: 1.05,

@@ -30,7 +30,7 @@ export function LandingStage() {
   };
 
   return (
-    <div className="relative w-full h-screen flex items-center justify-center overflow-hidden">
+    <div className="stage-shell flex items-center justify-center">
       {/* Glowing gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-black" />
 
@@ -41,7 +41,7 @@ export function LandingStage() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center">
+      <div className="stage-content flex flex-col items-center justify-center text-center">
         {/* Glowing Orb */}
         <motion.div
           className="relative mb-8 sm:mb-12 cursor-pointer"
@@ -68,12 +68,12 @@ export function LandingStage() {
         </motion.div>
 
         {/* Main text - word by word animation */}
-        <div className="text-center mb-8 sm:mb-12 min-h-16 sm:h-20 flex items-center justify-center">
+        <div className="mb-8 flex min-h-16 items-center justify-center sm:mb-12 sm:h-20">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif text-center px-3 sm:px-4 text-yellow-100"
+            className="px-3 font-serif text-xl leading-snug text-yellow-100 sm:px-4 sm:text-2xl md:text-3xl lg:text-4xl"
           >
             <motion.span
               initial={{ opacity: 0, y: 10 }}
@@ -134,7 +134,7 @@ export function LandingStage() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
             onClick={() => setCurrentStage('stage1')}
-            className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-slate-900 font-bold text-sm sm:text-lg rounded-lg shadow-2xl transition-all duration-300"
+            className="stage-button text-sm tracking-wide sm:text-lg"
             whileHover={{
               boxShadow: '0 0 30px rgba(250, 204, 21, 0.6)',
               scale: 1.05,
@@ -151,7 +151,7 @@ export function LandingStage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute bottom-16 sm:bottom-20 text-xs sm:text-sm text-yellow-200 italic px-4"
+            className="absolute bottom-12 px-4 text-xs italic leading-relaxed text-yellow-200 sm:bottom-16 sm:text-sm"
           >
             Kamu sudah dekat… terus melangkah.
           </motion.div>

@@ -58,7 +58,7 @@ export function Stage2() {
   };
 
   return (
-    <div className={`relative w-full h-screen flex flex-col items-center justify-center overflow-hidden transition-all ${shake ? 'shake' : ''}`}>
+    <div className={`stage-shell flex flex-col items-center justify-center transition-all ${shake ? 'shake' : ''}`}>
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-black" />
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-96 h-96 bg-yellow-400/3 rounded-full blur-3xl" />
@@ -84,15 +84,15 @@ export function Stage2() {
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-2xl px-6">
+      <div className="stage-content max-w-2xl px-2 sm:px-4">
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="mb-10 text-center sm:mb-12"
         >
-          <h1 className="text-3xl md:text-5xl font-serif text-yellow-100 mb-4">
+          <h1 className="stage-title mb-4">
             STAGE 2 — Siapa yang Tahu?
           </h1>
         </motion.div>
@@ -102,13 +102,13 @@ export function Stage2() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="text-center mb-12 space-y-4"
+          className="mb-10 space-y-4 text-center sm:mb-12"
         >
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-yellow-200/80 text-lg"
+            className="stage-lead text-base sm:text-lg"
           >
             Dia tahu sebelum kamu tahu.
           </motion.p>
@@ -116,7 +116,7 @@ export function Stage2() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.6 }}
-            className="text-yellow-200/80 text-lg"
+            className="stage-lead text-base sm:text-lg"
           >
             Dia melihat sebelum kamu berjalan.
           </motion.p>
@@ -124,7 +124,7 @@ export function Stage2() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.0, duration: 0.6 }}
-            className="text-yellow-100 text-xl font-serif"
+            className="font-serif text-xl leading-snug text-yellow-100 sm:text-2xl"
           >
             Siapakah Dia?
           </motion.p>
@@ -145,13 +145,13 @@ export function Stage2() {
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Tulis jawabanmu…"
-              className="w-full px-6 py-4 bg-slate-800/50 border-2 border-yellow-400 text-yellow-100 placeholder-yellow-300/50 rounded-lg text-center text-lg focus:outline-none focus:border-yellow-300 focus:bg-slate-800/70 transition-all"
-              autoFocus
-            />
-            <motion.button
-              onClick={handleSubmit}
-              disabled={isCorrect}
-              className="w-full mt-4 px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-slate-900 font-bold rounded-lg shadow-2xl disabled:opacity-50"
+               className="w-full rounded-lg border-2 border-yellow-400 bg-slate-800/50 px-6 py-4 text-center text-base leading-relaxed text-yellow-100 placeholder-yellow-300/50 transition-all focus:border-yellow-300 focus:bg-slate-800/70 focus:outline-none sm:text-lg"
+               autoFocus
+             />
+             <motion.button
+               onClick={handleSubmit}
+               disabled={isCorrect}
+               className="stage-button mt-4 w-full disabled:opacity-50"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -182,7 +182,7 @@ export function Stage2() {
                   transition={{ delay: 0.3 }}
                   className="mb-8"
                 >
-                  <motion.div className="text-yellow-100 text-xl font-serif mb-8 italic">
+                   <motion.div className="mb-8 font-serif text-lg italic leading-relaxed text-yellow-100 sm:text-xl">
                     {VERSE_PARTIAL.split('').map((char, idx) => (
                       <motion.span
                         key={idx}
@@ -199,14 +199,14 @@ export function Stage2() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.5 }}
                     transition={{ delay: 3 }}
-                    className="text-yellow-300/50 mb-8"
+                     className="mb-8 text-yellow-300/50"
                   >
                     (Pesan belum lengkap...)
                   </motion.p>
 
                   <motion.button
                     onClick={() => setCurrentStage('stage3')}
-                    className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-slate-900 font-bold text-lg rounded-lg shadow-2xl"
+                     className="stage-button text-lg"
                     whileHover={{
                       boxShadow: '0 0 30px rgba(250, 204, 21, 0.6)',
                       scale: 1.05,

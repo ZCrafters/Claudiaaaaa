@@ -58,7 +58,7 @@ export function Stage3() {
   };
 
   return (
-    <div className={`relative w-full h-screen flex flex-col items-center justify-center overflow-hidden transition-all ${shake ? 'shake' : ''}`}>
+    <div className={`stage-shell flex flex-col items-center justify-center transition-all ${shake ? 'shake' : ''}`}>
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-black" />
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-96 h-96 bg-yellow-400/3 rounded-full blur-3xl" />
@@ -95,15 +95,15 @@ export function Stage3() {
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-2xl px-6">
+      <div className="stage-content max-w-2xl px-2 sm:px-4">
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="mb-10 text-center sm:mb-12"
         >
-          <h1 className="text-3xl md:text-5xl font-serif text-yellow-100 mb-4">
+          <h1 className="stage-title mb-4">
             STAGE 3 — Koordinat Harapan
           </h1>
         </motion.div>
@@ -113,10 +113,10 @@ export function Stage3() {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 0.8 }}
-          className="flex justify-center items-center gap-8 mb-12"
+          className="mb-10 flex items-center justify-center gap-8 sm:mb-12"
         >
           <motion.div
-            className="text-6xl md:text-7xl font-serif text-yellow-300 font-bold"
+            className="font-serif text-5xl font-bold leading-none text-yellow-300 sm:text-6xl md:text-7xl"
             animate={{
               textShadow: [
                 '0 0 30px rgba(253, 224, 71, 0.5)',
@@ -135,7 +135,7 @@ export function Stage3() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.6 }}
-          className="text-center text-yellow-200/80 text-lg mb-12"
+          className="stage-lead mb-10 text-center text-base sm:mb-12 sm:text-lg"
         >
           Ini bukan angka biasa. Ini adalah koordinat harapan. Di mana kamu menemukannya?
         </motion.p>
@@ -148,7 +148,7 @@ export function Stage3() {
             transition={{ delay: 1.2, duration: 0.6 }}
             className="mb-8"
           >
-            <label className="block text-yellow-200 text-center mb-4 font-serif">
+            <label className="mb-4 block text-center font-serif text-yellow-200">
               Buku apa? (nama kitab)
             </label>
             <input
@@ -158,13 +158,13 @@ export function Stage3() {
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Tulis jawabanmu…"
-              className="w-full px-6 py-4 bg-slate-800/50 border-2 border-yellow-400 text-yellow-100 placeholder-yellow-300/50 rounded-lg text-center text-lg focus:outline-none focus:border-yellow-300 focus:bg-slate-800/70 transition-all"
-              autoFocus
-            />
-            <motion.button
-              onClick={handleSubmit}
-              disabled={isCorrect}
-              className="w-full mt-4 px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-slate-900 font-bold rounded-lg shadow-2xl disabled:opacity-50"
+               className="w-full rounded-lg border-2 border-yellow-400 bg-slate-800/50 px-6 py-4 text-center text-base leading-relaxed text-yellow-100 placeholder-yellow-300/50 transition-all focus:border-yellow-300 focus:bg-slate-800/70 focus:outline-none sm:text-lg"
+               autoFocus
+             />
+             <motion.button
+               onClick={handleSubmit}
+               disabled={isCorrect}
+               className="stage-button mt-4 w-full disabled:opacity-50"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -194,9 +194,9 @@ export function Stage3() {
                 transition={{ delay: 0.3 }}
                 className="mb-8"
               >
-                <p className="text-yellow-200 text-lg mb-4">
-                  Menghubungkan semua harapan…
-                </p>
+                 <p className="mb-4 text-base leading-relaxed text-yellow-200 sm:text-lg">
+                   Menghubungkan semua harapan…
+                 </p>
               </motion.div>
             </motion.div>
           )}

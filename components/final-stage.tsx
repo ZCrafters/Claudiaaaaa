@@ -84,7 +84,7 @@ export function FinalStage() {
   }
 
   return (
-    <div className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden py-8 sm:py-12 px-4 sm:px-6">
+    <div className="stage-shell flex flex-col items-center justify-center">
       {/* Animated gold gradient background */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 via-slate-950 to-black"
@@ -120,7 +120,7 @@ export function FinalStage() {
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-2xl px-2 sm:px-4">
+      <div className="stage-content max-w-2xl px-2 sm:px-4">
         {/* The Verse */}
         {showVerse && (
           <motion.div
@@ -129,7 +129,7 @@ export function FinalStage() {
             transition={{ duration: 0.5 }}
             className="mb-8 sm:mb-12 text-center"
           >
-            <div className="text-lg sm:text-2xl md:text-3xl font-serif text-yellow-100 leading-relaxed mb-4 sm:mb-6">
+            <div className="mb-4 font-serif text-lg leading-relaxed text-yellow-100 sm:mb-6 sm:text-2xl md:text-3xl">
               {FULL_VERSE.split('').map((char, idx) => (
                 <motion.span
                   key={idx}
@@ -141,7 +141,7 @@ export function FinalStage() {
                 </motion.span>
               ))}
             </div>
-            <p className="text-yellow-200/80 font-serif italic">— {VERSE_REFERENCE}</p>
+            <p className="font-serif italic leading-relaxed text-yellow-200/80">— {VERSE_REFERENCE}</p>
           </motion.div>
         )}
 
@@ -164,7 +164,7 @@ export function FinalStage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-8 sm:mb-12"
           >
-            <div className="text-base sm:text-xl md:text-2xl text-yellow-100 leading-relaxed">
+            <div className="mx-auto max-w-2xl text-base leading-relaxed text-yellow-100 sm:text-xl md:text-2xl">
               {PERSONAL_MESSAGE.split('').map((char, idx) => (
                 <motion.span
                   key={idx}
@@ -189,7 +189,7 @@ export function FinalStage() {
           >
             <motion.button
               onClick={handleSurpriseClick}
-              className="inline-block px-6 sm:px-8 py-4 sm:py-6 bg-yellow-400/20 border border-yellow-400 rounded-lg max-w-sm cursor-pointer hover:bg-yellow-400/30 transition-all"
+               className="inline-block max-w-sm cursor-pointer rounded-lg border border-yellow-400 bg-yellow-400/20 px-6 py-4 transition-all hover:bg-yellow-400/30 sm:px-8 sm:py-6"
               animate={{
                 boxShadow: [
                   '0 0 20px rgba(250, 204, 21, 0.3)',
