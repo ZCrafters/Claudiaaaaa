@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import '@/styles/flowers.css';
+import '@/styles/flowers.scss';
 
 export function FlowerAnimation() {
   const [isLoaded, setIsLoaded] = useState(false);
