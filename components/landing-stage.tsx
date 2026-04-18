@@ -41,10 +41,10 @@ export function LandingStage() {
       </div>
 
       {/* Content */}
-      <div className="stage-content flex flex-col items-center justify-center text-center">
+      <div className="stage-content flex w-full max-w-3xl flex-col items-center justify-center text-center">
         {/* Glowing Orb */}
         <motion.div
-          className="relative mb-8 sm:mb-12 cursor-pointer"
+          className="relative mb-6 cursor-pointer sm:mb-8 md:mb-10"
           onClick={handleOrbClick}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
@@ -68,12 +68,12 @@ export function LandingStage() {
         </motion.div>
 
         {/* Main text - word by word animation */}
-        <div className="mb-8 flex min-h-16 items-center justify-center sm:mb-12 sm:h-20">
+        <div className="mb-6 flex min-h-[6.5rem] w-full max-w-[24ch] items-center justify-center sm:mb-8 sm:min-h-[7.5rem] md:min-h-[8.5rem]">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="px-3 font-serif text-xl leading-snug text-yellow-100 sm:px-4 sm:text-2xl md:text-3xl lg:text-4xl"
+            className="px-2 font-serif text-xl leading-tight text-yellow-100 sm:px-3 sm:text-2xl md:text-3xl lg:text-4xl"
           >
             <motion.span
               initial={{ opacity: 0, y: 10 }}
@@ -134,7 +134,7 @@ export function LandingStage() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
             onClick={() => setCurrentStage('stage1')}
-            className="stage-button text-sm tracking-wide sm:text-lg"
+            className="stage-button mt-2 text-sm tracking-wide sm:mt-3 sm:text-lg"
             whileHover={{
               boxShadow: '0 0 30px rgba(250, 204, 21, 0.6)',
               scale: 1.05,
